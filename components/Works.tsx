@@ -29,6 +29,13 @@ const Works = () => {
       link: "https://github.com/SajaJawad/Subsec_LandingPage",
       github: "https://github.com/SajaJawad/Subsec_LandingPage",
     },
+    {
+      title: "Luma Studio",
+      category: "NextJs",
+      image: "/luma.png",
+      link: "https://next-with-ai-eight.vercel.app/",
+      github: "https://github.com/SajaJawad/Next-With-AI.git",
+    },
   ];
 
   return (
@@ -58,7 +65,7 @@ const Works = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-accent transition-all shadow-lg shadow-primary/20"
+            className="bg-[#ae86ce] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#B591D4] transition-all shadow-lg shadow-[#ae86ce]/40"
           >
             View All Projects
           </motion.button>

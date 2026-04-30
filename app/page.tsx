@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -18,11 +19,17 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-12 border-t border-border bg-muted/10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
-              S
-            </div>
-            <span className="font-bold text-lg tracking-tight">Saja Jawad</span>
+          <div className="flex items-center gap-5 -mt-4">
+            <Image
+              src="/logo.png"
+              alt="Saja Jawad"
+              width={160}
+              height={160}
+              className="object-cover h-[100px] w-[100px] rounded-full shadow-md"
+            />
+            <span className="font-serif italic text-2xl font-bold text-[#ae86ce] tracking-wide">
+              Saja Jawad
+            </span>
           </div>
 
           <div className="flex space-x-8 text-sm font-medium text-foreground/60">

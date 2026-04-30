@@ -138,7 +138,7 @@ const Contact = () => {
               <div className="md:col-span-2 pt-4">
                 <button
                   type="button"
-                  className="w-full md:w-auto bg-primary text-white px-10 py-5 rounded-2xl font-bold hover:bg-accent transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-3"
+                  className="w-full md:w-auto bg-[#ae86ce] text-white px-10 py-5 rounded-2xl font-bold hover:bg-[#B591D4] transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#ae86ce]/40 flex items-center justify-center gap-3"
                 >
                   Send Message
                   <Send size={20} />

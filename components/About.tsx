@@ -71,22 +71,22 @@ const About = () => {
             className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             <FeatureCard
-              icon={<Code2 className="text-primary" />}
+              icon={<Code2 className="text-primary w-7 h-7 group-hover:text-accent transition-colors duration-300" />}
               title="Clean Code"
               description="Writing maintainable, scalable, and efficient code is my top priority."
             />
             <FeatureCard
-              icon={<Palette className="text-primary" />}
+              icon={<Palette className="text-primary w-7 h-7 group-hover:text-accent transition-colors duration-300" />}
               title="Modern Design"
               description="Creating visually appealing interfaces that follow current design trends."
             />
             <FeatureCard
-              icon={<Globe className="text-primary" />}
+              icon={<Globe className="text-primary w-7 h-7 group-hover:text-accent transition-colors duration-300" />}
               title="SEO Optimized"
               description="Ensuring your website is visible and ranks well on search engines."
             />
             <FeatureCard
-              icon={<Zap className="text-primary" />}
+              icon={<Zap className="text-primary w-7 h-7 group-hover:text-accent transition-colors duration-300" />}
               title="Fast Performance"
               description="Optimizing every millisecond for a lightning-fast user experience."
             />
@@ -106,8 +106,9 @@ const FeatureCard = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-white p-8 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
-    <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+  <div className="bg-white p-8 rounded-3xl border border-border shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10 group-hover:bg-primary/10 transition-colors duration-300" />
+    <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-inner border border-white">
       {icon}
     </div>
     <h4 className="text-xl font-bold text-foreground mb-3">{title}</h4>

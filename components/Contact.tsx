@@ -163,15 +163,15 @@ const ContactInfoItem = ({
   value: string;
   href: string;
 }) => (
-  <a href={href} className="flex items-center gap-5 group">
-    <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+  <a href={href} className="flex items-center gap-5 group p-4 -ml-4 rounded-3xl transition-all duration-300 hover:-translate-y-1">
+    <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:text-[#B591D4] transition-all duration-300">
       {icon}
     </div>
     <div>
       <div className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-0.5">
         {label}
       </div>
-      <div className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+      <div className="text-lg font-bold text-foreground group-hover:text-[#B591D4] transition-colors">
         {value}
       </div>
     </div>

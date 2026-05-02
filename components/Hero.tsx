@@ -17,7 +17,7 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
 
 const Hero = () => {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
+    <section className="relative pt-40 md:pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
         <video
@@ -45,7 +45,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1] text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.2] lg:leading-[1.1] text-foreground mt-4 md:mt-0">
               I'm <span className="text-primary">Saja Jawad</span>, <br />
               Building digital <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent relative inline-block">
@@ -94,27 +94,27 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
           >
-            <div className="relative w-full max-w-sm">
+            <div className="relative w-full max-w-sm flex flex-col sm:block gap-3">
               <input
                 type="email"
                 placeholder="Email address"
-                className="w-full pl-6 pr-40 py-4 bg-white border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm text-foreground"
+                className="w-full pl-6 pr-6 sm:pr-40 py-4 bg-white border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm text-foreground"
               />
-              <button className="absolute right-2 top-2 bottom-2 bg-[#ae86ce] text-white px-6 rounded-xl font-semibold hover:bg-[#B591D4] transition-colors">
+              <button className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-2 sm:bottom-2 bg-[#ae86ce] text-white px-6 py-4 sm:py-0 rounded-2xl sm:rounded-xl font-semibold hover:bg-[#B591D4] transition-colors">
                 Connect With Me
               </button>
             </div>
           </motion.div>
         </div>
 
-        <div className="flex-1 relative w-full h-[450px] lg:h-[600px] flex items-center justify-center mt-10 lg:mt-0">
+        <div className="flex-1 relative w-full h-[350px] sm:h-[450px] lg:h-[600px] flex items-center justify-center mt-16 sm:mt-10 lg:mt-0">
           {/* Custom Beautiful Light Animation (Glassmorphism) */}
           <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-visible z-0">
             {/* Background glowing blobs */}
             <motion.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[300px] h-[300px] bg-primary/20 rounded-full blur-[80px] top-10 left-10"
+              className="absolute w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-primary/20 rounded-full blur-[60px] sm:blur-[80px] top-10 left-10"
             />
             <motion.div
               animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
@@ -124,19 +124,19 @@ const Hero = () => {
                 ease: "easeInOut",
                 delay: 1,
               }}
-              className="absolute w-[300px] h-[300px] bg-accent/20 rounded-full blur-[80px] bottom-10 right-10"
+              className="absolute w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-accent/20 rounded-full blur-[60px] sm:blur-[80px] bottom-10 right-10"
             />
 
             {/* Rotating Glass Rectangles */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-[3rem] border border-white/40 bg-gradient-to-tr from-white/10 to-white/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]"
+              className="absolute w-[280px] h-[280px] md:w-[450px] md:h-[450px] rounded-[2rem] sm:rounded-[3rem] border border-white/40 bg-gradient-to-tr from-white/10 to-white/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]"
             />
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[280px] h-[280px] md:w-[350px] md:h-[350px] rounded-full border border-white/50 bg-gradient-to-bl from-white/20 to-white/5 backdrop-blur-md shadow-xl"
+              className="absolute w-[220px] h-[220px] md:w-[350px] md:h-[350px] rounded-full border border-white/50 bg-gradient-to-bl from-white/20 to-white/5 backdrop-blur-md shadow-xl"
             />
 
             {/* Floating Mini Shapes */}
@@ -172,7 +172,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="absolute z-20"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-[2.5rem] border-[8px] border-white/80 bg-white shadow-2xl transform hover:scale-105 transition-transform duration-500 backdrop-blur-sm">
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border-[6px] sm:border-[8px] border-white/80 bg-white shadow-2xl transform hover:scale-105 transition-transform duration-500 backdrop-blur-sm">
               <Image
                 src="/hero.png"
                 alt="Saja Jawad Soliman Qudaih"

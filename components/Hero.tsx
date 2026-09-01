@@ -3,9 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, FileText, Github, Linkedin } from "lucide-react";
+import { ArrowUpRight, FileText, Github, Mail } from "lucide-react";
 import { Container } from "./ui/Container";
 import { useLanguage } from "./LanguageProvider";
+import { WhatsAppIcon } from "./ui/WhatsAppIcon";
 
 export function Hero() {
   const { t, language } = useLanguage();
@@ -20,56 +21,66 @@ export function Hero() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-full object-cover scale-105"
         >
           <source src="/vedio.mp4" type="video/mp4" />
         </video>
-        {/* Semi-transparent overlay so video shows through clearly while keeping text high-contrast */}
-        <div className="absolute inset-0 bg-background/30 dark:bg-background/35 backdrop-blur-[0.5px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-transparent to-background" />
+        {/* Dark overlay for contrast */}
+        <div className="absolute inset-0 bg-background/55 dark:bg-background/35 backdrop-blur-[0.5px]" />
       </div>
 
-      {/* Ambient glowing accent */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-tr from-primary/15 via-soft-lavender/30 to-transparent blur-3xl z-0 rounded-full pointer-events-none" />
-
-      <Container>
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
-          {/* Left Column: Hero Text Content */}
-          <div className="flex-1 text-start max-w-2xl">
-            {/* Availability Status Badge */}
+      <Container className="relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+          {/* Left Column: Editorial Headline & Copy */}
+          <div className="max-w-2xl text-center lg:text-left">
+            {/* Availability Pill */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-surface/90 border border-primary/20 text-primary text-xs font-medium mb-6 shadow-subtle backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/20 bg-surface/80 backdrop-blur-md shadow-subtle mb-6"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span>{t.hero.availableStatus}</span>
+              <span className="text-xs font-mono text-muted-foreground font-medium">
+                {t.hero.availableStatus}
+              </span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Name & Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.15] mb-6"
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6"
             >
-              {t.hero.greeting} <span className="text-primary">{t.hero.name}</span>, <br />
-              {t.hero.roleHeadline}
+              {t.hero.greeting}{" "}
+              <span className="font-serif italic font-normal text-secondary">
+                {t.hero.name}
+              </span>
+              <br />
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground/90">
+                {t.hero.roleHeadline}
+              </span>
             </motion.h1>
 
-            {/* Supporting Copy */}
+            {/* Bio Paragraph */}
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl font-medium"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
             >
-              {t.hero.bioLead} <span className="font-semibold text-foreground">{t.hero.bioFrontend}</span>,{" "}
-              <span className="font-semibold text-foreground">{t.hero.bioNextJs}</span>, {language === "en" ? "and" : "و"}{" "}
+              {t.hero.bioLead}{" "}
+              <strong className="font-semibold text-foreground">
+                {t.hero.bioFrontend}
+              </strong>
+              ,{" "}
+              <strong className="font-semibold text-foreground">
+                {t.hero.bioNextJs}
+              </strong>, {language === "en" ? "and" : "و"}{" "}
               <span className="font-semibold text-foreground">{t.hero.bioReact}</span>
               {t.hero.bioBody}
             </motion.p>
@@ -139,13 +150,20 @@ export function Hero() {
                   <Github className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://github.com/SajaJawad"
+                  href="https://wa.me/970597805912"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="LinkedIn Profile"
+                  aria-label="WhatsApp Contact"
                   className="w-9 h-9 rounded-lg border border-border/80 bg-surface/90 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors backdrop-blur-sm"
                 >
-                  <Linkedin className="w-4 h-4" />
+                  <WhatsAppIcon size={16} />
+                </a>
+                <a
+                  href="mailto:saiamaher2002@gmail.com"
+                  aria-label="Direct Email"
+                  className="w-9 h-9 rounded-lg border border-border/80 bg-surface/90 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors backdrop-blur-sm"
+                >
+                  <Mail className="w-4 h-4" />
                 </a>
               </div>
             </motion.div>

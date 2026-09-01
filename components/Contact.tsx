@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
+import { Copy, Check, Mail, MapPin, Phone, Github } from "lucide-react";
 import { Container } from "./ui/Container";
 import { SectionHeading } from "./ui/SectionHeading";
 import { useToast } from "./ui/Toast";
@@ -151,13 +151,11 @@ export function Contact() {
                     <Github className="w-4.5 h-4.5" />
                   </a>
                   <a
-                    href="https://github.com/SajaJawad"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn Profile"
+                    href="mailto:saiamaher2002@gmail.com"
+                    aria-label="Direct Email"
                     className="w-10 h-10 rounded-xl border border-primary/20 bg-soft-lavender/70 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-105 shadow-subtle transition-all duration-300"
                   >
-                    <Linkedin className="w-4.5 h-4.5" />
+                    <Mail className="w-4.5 h-4.5" />
                   </a>
                   <a
                     href="https://wa.me/970597805912"

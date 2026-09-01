@@ -2,9 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowUp, Github, Linkedin } from "lucide-react";
+import { ArrowUp, Github, Mail } from "lucide-react";
 import { Container } from "./ui/Container";
 import { useLanguage } from "./LanguageProvider";
+import { WhatsAppIcon } from "./ui/WhatsAppIcon";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -23,13 +24,13 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand & Stack Info */}
           <div className="flex items-center gap-4">
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-border">
+            <div className="relative w-9 h-9 shrink-0 flex items-center justify-center">
               <Image
                 src="/logo2.png"
                 alt="Saja Jawad"
                 fill
-                sizes="32px"
-                className="object-cover"
+                sizes="36px"
+                className="object-contain"
               />
             </div>
             <div>
@@ -55,13 +56,20 @@ export function Footer() {
                 <Github className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com/SajaJawad"
+                href="https://wa.me/970597805912"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
+                aria-label="WhatsApp Contact"
                 className="text-muted-foreground hover:text-foreground transition-colors p-1"
               >
-                <Linkedin className="w-4 h-4" />
+                <WhatsAppIcon size={16} />
+              </a>
+              <a
+                href="mailto:saiamaher2002@gmail.com"
+                aria-label="Direct Email"
+                className="text-muted-foreground hover:text-foreground transition-colors p-1"
+              >
+                <Mail className="w-4 h-4" />
               </a>
             </div>
 

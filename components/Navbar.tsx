@@ -4,11 +4,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Github, Linkedin, Menu, X, Command } from "lucide-react";
+import { Github, Mail, Menu, X, Command } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "./ThemeToggle";
 import { useLanguage } from "./LanguageProvider";
 import { LanguageToggle } from "./LanguageToggle";
+import { WhatsAppIcon } from "./ui/WhatsAppIcon";
 
 export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,9 +69,14 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
       label: "GitHub Profile",
     },
     {
-      icon: <Linkedin className="w-4 h-4" />,
-      href: "https://github.com/SajaJawad",
-      label: "LinkedIn Profile",
+      icon: <WhatsAppIcon size={16} />,
+      href: "https://wa.me/970597805912",
+      label: "WhatsApp Contact",
+    },
+    {
+      icon: <Mail className="w-4 h-4" />,
+      href: "mailto:saiamaher2002@gmail.com",
+      label: "Direct Email",
     },
   ];
 
@@ -104,13 +110,13 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
           }}
           className="flex items-center gap-2 sm:gap-3 group focus-visible:ring-2 focus-visible:ring-primary rounded-lg p-0.5"
         >
-          <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/50 transition-colors shadow-sm shrink-0">
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 shrink-0 flex items-center justify-center">
             <Image
               src="/logo2.png"
               alt={t.hero.name}
               fill
-              sizes="36px"
-              className="object-cover"
+              sizes="40px"
+              className="object-contain"
               priority
             />
           </div>

@@ -4,12 +4,11 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Github, Mail, Menu, X, Command } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "./ThemeToggle";
 import { useLanguage } from "./LanguageProvider";
 import { LanguageToggle } from "./LanguageToggle";
-import { WhatsAppIcon } from "./ui/WhatsAppIcon";
 
 export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,24 +60,6 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
-
-  const socialLinks = [
-    {
-      icon: <Github className="w-4 h-4" />,
-      href: "https://github.com/SajaJawad",
-      label: "GitHub Profile",
-    },
-    {
-      icon: <WhatsAppIcon size={16} />,
-      href: "https://wa.me/970597805912",
-      label: "WhatsApp Contact",
-    },
-    {
-      icon: <Mail className="w-4 h-4" />,
-      href: "mailto:saiamaher2002@gmail.com",
-      label: "Direct Email",
-    },
-  ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (pathname === "/") {
@@ -160,39 +141,31 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
             <button
               onClick={onOpenCommandPalette}
               type="button"
-              className="hidden lg:flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-muted-foreground bg-surface border border-border rounded-lg hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
-              aria-label="Open Command Palette"
+              className="w-9 h-9 rounded-lg border border-border bg-surface hover:bg-muted text-foreground/80 hover:text-foreground flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+              aria-label="Search"
+              title="Search (⌘K)"
             >
-              <Command className="w-3.5 h-3.5" />
-              <span>Search</span>
-              <kbd className="px-1.5 py-0.5 text-[10px] bg-muted border border-border rounded text-muted-foreground">
-                ⌘K
-              </kbd>
+              <Search className="w-4 h-4" />
             </button>
           )}
 
           <LanguageToggle />
-
-          <div className="flex items-center gap-1.5 border-r border-l border-border px-3">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
-
           <ThemeToggle />
         </div>
 
         {/* Mobile Menu Toggle Controls */}
         <div className="flex items-center gap-2 md:hidden">
+          {onOpenCommandPalette && (
+            <button
+              onClick={onOpenCommandPalette}
+              type="button"
+              className="w-9 h-9 rounded-lg border border-border bg-surface hover:bg-muted text-foreground/80 hover:text-foreground flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+              aria-label="Search"
+              title="Search (⌘K)"
+            >
+              <Search className="w-4 h-4" />
+            </button>
+          )}
           <LanguageToggle />
           <ThemeToggle />
           <button
@@ -247,25 +220,6 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
                 })}
               </nav>
 
-              <div className="pt-4 border-t border-border/80 flex items-center justify-between">
-                <span className="text-xs font-mono text-muted-foreground uppercase font-semibold">
-                  Social Links
-                </span>
-                <div className="flex items-center gap-3">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
-                      className="w-9 h-9 rounded-lg border border-border bg-background flex items-center justify-center text-foreground hover:text-primary transition-colors"
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
           </motion.div>
         )}

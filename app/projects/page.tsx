@@ -149,23 +149,23 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* Card Actions Footer */}
-                    <div className="p-6 pt-0 flex items-center justify-between border-t border-border/40 mt-4">
+                    <div className="p-4 sm:p-6 pt-0 flex flex-wrap items-center justify-between gap-2.5 mt-4 border-t border-border/40">
                       <Link
                         href={`/projects/${project.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-hover transition-colors whitespace-nowrap shrink-0"
                       >
                         <span>{t.projects.caseStudy}</span>
-                        <ArrowUpRight className={`w-3.5 h-3.5 ${language === "ar" ? "rotate-[-90deg]" : ""}`} />
+                        <ArrowUpRight className={`w-3.5 h-3.5 shrink-0 ${language === "ar" ? "rotate-[-90deg]" : ""}`} />
                       </Link>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 shrink-0">
                         {project.liveUrl && (
                           <a
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`Live Demo for ${title}`}
-                            className="w-8 h-8 rounded-lg border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                            className="w-8 h-8 rounded-lg border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors shrink-0"
                           >
                             <Globe className="w-3.5 h-3.5" />
                           </a>

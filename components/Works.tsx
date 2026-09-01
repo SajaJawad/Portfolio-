@@ -101,36 +101,36 @@ export function Works({ onQuickView }: { onQuickView?: (slug: string) => void })
                 </div>
 
                 {/* Card Actions Footer */}
-                <div className="px-6 pb-6 pt-4 border-t border-border/50 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
+                <div className="px-4 sm:px-6 pb-5 sm:pb-6 pt-4 border-t border-border/50 flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary-hover transition-colors shadow-subtle"
+                      className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl bg-primary text-primary-foreground text-[11px] sm:text-xs font-semibold hover:bg-primary-hover transition-colors shadow-subtle whitespace-nowrap shrink-0"
                     >
                       <span>{t.projects.caseStudy}</span>
-                      <ArrowUpRight className={`w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform ${language === "ar" ? "rotate-[-90deg]" : ""}`} />
+                      <ArrowUpRight className={`w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform shrink-0 ${language === "ar" ? "rotate-[-90deg]" : ""}`} />
                     </Link>
 
                     {onQuickView && (
                       <button
                         onClick={() => onQuickView(project.slug)}
                         type="button"
-                        className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-muted border border-border/60 text-foreground text-xs font-medium hover:bg-border/60 transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-2 rounded-xl bg-muted border border-border/60 text-foreground text-[11px] sm:text-xs font-medium hover:bg-border/60 transition-colors cursor-pointer whitespace-nowrap shrink-0"
                       >
-                        <Eye className="w-3.5 h-3.5 text-muted-foreground" />
+                        <Eye className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                         <span>{t.projects.quickView}</span>
                       </button>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 shrink-0">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Live demo for ${title}`}
-                        className="w-9 h-9 rounded-xl border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
+                        className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-xl border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors shrink-0"
                       >
                         <Globe className="w-4 h-4" />
                       </a>
@@ -141,7 +141,7 @@ export function Works({ onQuickView }: { onQuickView?: (slug: string) => void })
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`GitHub repo for ${title}`}
-                        className="w-9 h-9 rounded-xl border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
+                        className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-xl border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors shrink-0"
                       >
                         <Github className="w-4 h-4" />
                       </a>

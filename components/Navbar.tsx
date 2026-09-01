@@ -88,36 +88,39 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-surface/85 backdrop-blur-md border-b border-border/80 shadow-subtle py-3"
-          : "bg-background/60 backdrop-blur-sm border-b border-transparent py-5"
+          ? "bg-surface/90 backdrop-blur-md border-b border-border/80 shadow-subtle py-3"
+          : "bg-background/80 backdrop-blur-sm border-b border-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
         {/* Logo / Brand Name */}
         <Link
           href="/#hero"
-          onClick={(e) => handleNavClick(e, "/#hero")}
-          className="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-primary rounded-lg p-1"
+          onClick={(e) => {
+            setIsOpen(false);
+            handleNavClick(e, "/#hero");
+          }}
+          className="flex items-center gap-2 sm:gap-3 group focus-visible:ring-2 focus-visible:ring-primary rounded-lg p-0.5"
         >
-          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/50 transition-colors shadow-sm">
+          <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/50 transition-colors shadow-sm shrink-0">
             <Image
               src="/logo.png"
-              alt="Saja Jawad"
+              alt={t.hero.name}
               fill
               sizes="36px"
               className="object-cover"
               priority
             />
           </div>
-          <span className="font-serif italic text-xl md:text-2xl font-bold text-secondary tracking-wide group-hover:text-primary transition-colors">
+          <span className="font-serif italic text-sm sm:text-lg md:text-xl font-bold text-secondary tracking-tight whitespace-nowrap group-hover:text-primary transition-colors">
             {t.hero.name}
           </span>
         </Link>
 
         {/* Desktop Nav Links */}
-        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 bg-surface/60 border border-border/60 rounded-full px-4 py-1.5 backdrop-blur-md shadow-subtle">
+        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 bg-surface/80 border border-border/60 rounded-full px-4 py-1.5 backdrop-blur-md shadow-subtle">
           {navLinks.map((link) => {
             const isActive = pathname === "/" && activeSection === link.id;
 
@@ -151,7 +154,7 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
             <button
               onClick={onOpenCommandPalette}
               type="button"
-              className="hidden lg:flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-muted-foreground bg-surface border border-border rounded-lg hover:bg-muted hover:text-foreground transition-colors"
+              className="hidden lg:flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-muted-foreground bg-surface border border-border rounded-lg hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
               aria-label="Open Command Palette"
             >
               <Command className="w-3.5 h-3.5" />
@@ -182,7 +185,7 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
           <ThemeToggle />
         </div>
 
-        {/* Mobile Menu Toggle Button */}
+        {/* Mobile Menu Toggle Controls */}
         <div className="flex items-center gap-2 md:hidden">
           <LanguageToggle />
           <ThemeToggle />
@@ -192,44 +195,55 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
-            className="w-10 h-10 rounded-lg border border-border bg-surface flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+            className="w-10 h-10 rounded-lg border border-border bg-surface flex items-center justify-center text-foreground hover:bg-muted transition-colors cursor-pointer"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Fullscreen Navigation Overlay */}
+      {/* Mobile Slide-down Dropdown Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[73px] bottom-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-border p-6 flex flex-col justify-between md:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden bg-surface/98 backdrop-blur-2xl border-b border-border shadow-2xl"
           >
-            <nav className="flex flex-col gap-3 py-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.id}
-                  href={link.href}
-                  onClick={(e) => {
-                    setIsOpen(false);
-                    handleNavClick(e, link.href);
-                  }}
-                  className="px-4 py-3 text-lg font-medium text-foreground hover:text-primary hover:bg-muted rounded-xl transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
+            <div className="px-6 py-6 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
+              <nav className="flex flex-col gap-1.5">
+                {navLinks.map((link) => {
+                  const isActive = pathname === "/" && activeSection === link.id;
 
-            <div className="pt-6 border-t border-border flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
-                  Connect
+                  return (
+                    <Link
+                      key={link.id}
+                      href={link.href}
+                      onClick={(e) => {
+                        setIsOpen(false);
+                        handleNavClick(e, link.href);
+                      }}
+                      className={`px-4 py-3 text-sm font-semibold rounded-xl transition-all flex items-center justify-between ${
+                        isActive
+                          ? "bg-primary text-primary-foreground shadow-subtle"
+                          : "text-foreground hover:bg-muted border border-transparent"
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-primary-foreground" />
+                      )}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <div className="pt-4 border-t border-border/80 flex items-center justify-between">
+                <span className="text-xs font-mono text-muted-foreground uppercase font-semibold">
+                  Social Links
                 </span>
                 <div className="flex items-center gap-3">
                   {socialLinks.map((social) => (
@@ -239,7 +253,7 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="w-10 h-10 rounded-lg border border-border bg-background flex items-center justify-center text-foreground/80 hover:text-primary transition-colors"
+                      className="w-9 h-9 rounded-lg border border-border bg-background flex items-center justify-center text-foreground hover:text-primary transition-colors"
                     >
                       {social.icon}
                     </a>

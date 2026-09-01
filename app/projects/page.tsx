@@ -1,132 +1,197 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowLeft } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowUpRight, Github, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { projects } from "@/lib/projects";
+import { Container } from "@/components/ui/Container";
+import { useLanguage } from "@/components/LanguageProvider";
 
-const ProjectsPage = () => {
+export default function ProjectsPage() {
+  const { t, language } = useLanguage();
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const categories = ["All", ...Array.from(new Set(projects.map((p) => (language === "ar" && p.categoryAr) ? p.categoryAr : p.category)))];
+
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : projects.filter((p) => {
+          const cat = (language === "ar" && p.categoryAr) ? p.categoryAr : p.category;
+          return cat === selectedCategory;
+        });
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      
-      <section className="pt-32 pb-24 bg-muted/20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="mb-16">
-            <Link 
-              href="/" 
-              className="inline-flex items-center gap-2 text-primary font-bold mb-8 hover:gap-3 transition-all"
-            >
-              <ArrowLeft size={20} />
-              Back to Home
-            </Link>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl lg:text-6xl font-bold text-foreground mb-6"
-            >
-              All Projects
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-lg text-foreground/60 max-w-2xl"
-            >
-              A showcase of my recent work, ranging from web applications to AI platforms and branding projects.
-            </motion.p>
+
+      <section className="pt-32 pb-24 md:pt-40 md:pb-32">
+        <Container>
+          {/* Back to Home Link */}
+          <Link
+            href="/#hero"
+            className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors mb-10 group"
+          >
+            <ArrowLeft className={`w-4 h-4 transition-transform ${language === "ar" ? "rotate-180 group-hover:translate-x-1" : "group-hover:-translate-x-1"}`} />
+            <span>{t.projects.backToHome}</span>
+          </Link>
+
+          {/* Page Header */}
+          <div className="max-w-3xl mb-12">
+            <div className="inline-block text-xs font-semibold uppercase tracking-widest text-primary bg-soft-lavender px-3 py-1 rounded-md mb-3 border border-primary/10">
+              Portfolio
+            </div>
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-foreground mb-4">
+              {t.projects.allProjectsTitle}
+            </h1>
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+              {t.projects.allProjectsSubtitle}
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group flex flex-col bg-white rounded-2xl border border-border/60 shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 ease-out overflow-hidden"
-              >
-                <div className="relative aspect-video overflow-hidden bg-muted/20 p-2">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-primary/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary hover:scale-110 shadow-lg transition-transform"
-                    >
-                      <Github size={20} />
-                    </a>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary hover:scale-110 shadow-lg transition-transform"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                  </div>
-                </div>
-                <div className="p-6 md:p-8 flex flex-col flex-grow">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="text-xs font-bold text-primary tracking-wider uppercase">
-                      {project.category}
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h4>
-                </div>
-              </motion.div>
-            ))}
+          {/* Category Filter Pills & Counter */}
+          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-border/80 mb-12">
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => {
+                const isActive = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    type="button"
+                    className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-primary cursor-pointer ${
+                      isActive
+                        ? "bg-primary text-primary-foreground font-semibold shadow-subtle"
+                        : "bg-surface text-muted-foreground hover:text-foreground border border-border"
+                    }`}
+                  >
+                    {cat === "All" ? (language === "ar" ? "الكل" : "All") : cat}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="text-xs font-mono text-muted-foreground">
+              <span className="font-semibold text-foreground">
+                0{filteredProjects.length}
+              </span>{" "}
+              {t.projects.selectedWorksCount}
+            </div>
           </div>
-        </div>
+
+          {/* Projects Grid */}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => {
+                const title = (language === "ar" && project.titleAr) ? project.titleAr : project.title;
+                const category = (language === "ar" && project.categoryAr) ? project.categoryAr : project.category;
+                const shortDescription = (language === "ar" && project.shortDescriptionAr) ? project.shortDescriptionAr : project.shortDescription;
+
+                return (
+                  <motion.div
+                    layout
+                    key={project.slug}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="group rounded-2xl border border-primary/20 bg-gradient-to-tl from-soft-lavender/60 via-surface/95 to-surface shadow-subtle hover:shadow-card hover:border-primary/50 backdrop-blur-md transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Visual Aspect Container */}
+                      <div className="relative aspect-video overflow-hidden bg-muted border-b border-border/60">
+                        <Image
+                          src={project.image}
+                          alt={title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover object-top group-hover:scale-102 transition-transform duration-500"
+                        />
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="p-6">
+                        <div className="flex items-center justify-between gap-4 mb-3">
+                          <span className="text-[11px] font-mono font-semibold text-primary uppercase tracking-wider px-2 py-0.5 rounded bg-soft-lavender border border-primary/10">
+                            {category}
+                          </span>
+                          {project.year && (
+                            <span className="text-xs font-mono text-muted-foreground">
+                              {project.year}
+                            </span>
+                          )}
+                        </div>
+
+                        <h2 className="text-xl font-bold tracking-tight text-foreground mb-2 group-hover:text-primary transition-colors">
+                          {title}
+                        </h2>
+
+                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6">
+                          {shortDescription}
+                        </p>
+
+                        {/* Tech pills */}
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {project.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className="text-[11px] font-mono px-2 py-0.5 rounded bg-muted text-foreground/70 border border-border/50"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card Actions Footer */}
+                    <div className="p-6 pt-0 flex items-center justify-between border-t border-border/40 mt-4">
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
+                      >
+                        <span>{t.projects.caseStudy}</span>
+                        <ArrowUpRight className={`w-3.5 h-3.5 ${language === "ar" ? "rotate-[-90deg]" : ""}`} />
+                      </Link>
+
+                      <div className="flex items-center gap-2">
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Live Demo for ${title}`}
+                            className="w-8 h-8 rounded-lg border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <Globe className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`GitHub Repository for ${title}`}
+                            className="w-8 h-8 rounded-lg border border-border bg-background flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <Github className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        </Container>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-border bg-muted/10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-5 -mt-4">
-            <Image
-              src="/logo.png"
-              alt="Saja Jawad"
-              width={160}
-              height={160}
-              className="object-cover h-[100px] w-[100px] rounded-full shadow-md"
-            />
-            <span className="font-serif italic text-2xl font-bold text-[#ae86ce] tracking-wide">
-              Saja Jawad
-            </span>
-          </div>
-
-          <div className="flex space-x-8 text-sm font-medium text-foreground/60">
-            <a href="#" className="hover:text-primary transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
-              Cookies Settings
-            </a>
-          </div>
-
-          <p className="text-foreground/40 text-sm">
-            © {new Date().getFullYear()} Saja Jawad. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
-};
-
-export default ProjectsPage;
+}

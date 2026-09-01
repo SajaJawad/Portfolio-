@@ -1,54 +1,56 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import SignalStrip from "@/components/SignalStrip";
 import About from "@/components/About";
-import Services from "@/components/Services";
+import Experience from "@/components/Experience";
+import StackSection from "@/components/StackSection";
 import Works from "@/components/Works";
+import Services from "@/components/Services";
+import Process from "@/components/Process";
+import Currently from "@/components/Currently";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import CommandPalette from "@/components/CommandPalette";
+import ProjectModal from "@/components/ProjectModal";
+import { projects, Project } from "@/lib/projects";
 
 export default function Home() {
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [selectedQuickViewSlug, setSelectedQuickViewSlug] = useState<string | null>(null);
+
+  const selectedQuickViewProject: Project | null = selectedQuickViewSlug
+    ? projects.find((p) => p.slug === selectedQuickViewSlug) || null
+    : null;
+
   return (
-    <main className="min-h-screen bg-background selection:bg-primary/10 selection:text-primary">
-      <Navbar />
+    <main className="min-h-screen bg-background selection:bg-soft-lavender selection:text-primary relative">
+      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
       <Hero />
+      <SignalStrip />
       <About />
+      <Experience />
+      <Works onQuickView={(slug) => setSelectedQuickViewSlug(slug)} />
+      <StackSection />
       <Services />
-      <Works />
+      <Process />
+      <Currently />
       <Contact />
+      <Footer />
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-border bg-muted/10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-5 -mt-4">
-            <Image
-              src="/logo.png"
-              alt="Saja Jawad"
-              width={160}
-              height={160}
-              className="object-cover h-[100px] w-[100px] rounded-full shadow-md"
-            />
-            <span className="font-serif italic text-2xl font-bold text-[#ae86ce] tracking-wide">
-              Saja Jawad
-            </span>
-          </div>
+      {/* Command Palette Modal */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
 
-          <div className="flex space-x-8 text-sm font-medium text-foreground/60">
-            <a href="#" className="hover:text-primary transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
-              Cookies Settings
-            </a>
-          </div>
-
-          <p className="text-foreground/40 text-sm">
-            © {new Date().getFullYear()} Saja Jawad. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      {/* Desktop Quick View Modal */}
+      <ProjectModal
+        project={selectedQuickViewProject}
+        onClose={() => setSelectedQuickViewSlug(null)}
+      />
     </main>
   );
 }

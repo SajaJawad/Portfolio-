@@ -3,23 +3,18 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
+import { ArrowUpRight, FileText, Github, Linkedin } from "lucide-react";
+import { Container } from "./ui/Container";
+import { useLanguage } from "./LanguageProvider";
 
-// dynamically import Spline to prevent WebGL context loss in Next.js
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full absolute inset-0 flex items-center justify-center text-primary/50 text-sm">
-      Loading 3D Scene...
-    </div>
-  ),
-});
+export function Hero() {
+  const { t, language } = useLanguage();
+  const techLabels = ["React", "Next.js", "TypeScript", "Tailwind CSS"];
 
-const Hero = () => {
   return (
-    <section className="relative pt-40 md:pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
-      {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+    <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden z-0">
+      {/* Video Background Container */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         <video
           autoPlay
           loop
@@ -29,163 +24,173 @@ const Hero = () => {
         >
           <source src="/vedio.mp4" type="video/mp4" />
         </video>
-        {/* Overlay to allow video colors to show clearly while maintaining some readability */}
-        <div className="absolute inset-0 bg-background/50"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
+        {/* Semi-transparent overlay so video shows through clearly while keeping text high-contrast */}
+        <div className="absolute inset-0 bg-background/30 dark:bg-background/35 backdrop-blur-[0.5px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-transparent to-background" />
       </div>
 
-      {/* Background Decorative Elements */}
-      <div className="absolute top-20 right-[10%] w-64 h-64 bg-primary/10 rounded-full blur-3xl z-0" />
-      <div className="absolute bottom-10 left-[5%] w-96 h-96 bg-accent/10 rounded-full blur-3xl z-0" />
+      {/* Ambient glowing accent */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-tr from-primary/15 via-soft-lavender/30 to-transparent blur-3xl z-0 rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16 relative z-10 w-full">
-        <div className="flex-1 text-center lg:text-left z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.2] lg:leading-[1.1] text-foreground mt-4 md:mt-0">
-              I'm <span className="text-primary">Saja Jawad</span>, <br />
-              Building digital <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent relative inline-block">
-                experience.
-                <motion.svg
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 300 10"
-                  fill="none"
-                >
-                  <path
-                    d="M5 5C50 5 250 5 295 5"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </motion.svg>
+      <Container>
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
+          {/* Left Column: Hero Text Content */}
+          <div className="flex-1 text-start max-w-2xl">
+            {/* Availability Status Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-surface/90 border border-primary/20 text-primary text-xs font-medium mb-6 shadow-subtle backdrop-blur-md"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
               </span>
-            </h1>
-          </motion.div>
+              <span>{t.hero.availableStatus}</span>
+            </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg lg:text-xl text-foreground/70 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
-          >
-            A{" "}
-            <span className="font-semibold text-foreground">
-              Software Engineer
-            </span>{" "}
-            and{" "}
-            <span className="font-semibold text-foreground">
-              Frontend Developer
-            </span>
-            . I specialize in building high-performance, beautiful, and
-            user-centric web applications that turn complex problems into
-            elegant digital solutions.
-          </motion.p>
+            {/* Main Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.15] mb-6"
+            >
+              {t.hero.greeting} <span className="text-primary">{t.hero.name}</span>, <br />
+              {t.hero.roleHeadline}
+            </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-          >
-            <div className="relative w-full max-w-sm flex flex-col sm:block gap-3">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="w-full pl-6 pr-6 sm:pr-40 py-4 bg-white border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm text-foreground"
-              />
-              <button className="w-full sm:w-auto sm:absolute sm:right-2 sm:top-2 sm:bottom-2 bg-[#ae86ce] text-white px-6 py-4 sm:py-0 rounded-2xl sm:rounded-xl font-semibold hover:bg-[#B591D4] transition-colors">
-                Connect With Me
-              </button>
-            </div>
-          </motion.div>
-        </div>
+            {/* Supporting Copy */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl font-medium"
+            >
+              {t.hero.bioLead} <span className="font-semibold text-foreground">{t.hero.bioFrontend}</span>,{" "}
+              <span className="font-semibold text-foreground">{t.hero.bioNextJs}</span>, {language === "en" ? "and" : "و"}{" "}
+              <span className="font-semibold text-foreground">{t.hero.bioReact}</span>
+              {t.hero.bioBody}
+            </motion.p>
 
-        <div className="flex-1 relative w-full h-[350px] sm:h-[450px] lg:h-[600px] flex items-center justify-center mt-16 sm:mt-10 lg:mt-0">
-          {/* Custom Beautiful Light Animation (Glassmorphism) */}
-          <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-visible z-0">
-            {/* Background glowing blobs */}
+            {/* Primary Action Buttons */}
             <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-primary/20 rounded-full blur-[60px] sm:blur-[80px] top-10 left-10"
-            />
-            <motion.div
-              animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-              className="absolute w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-accent/20 rounded-full blur-[60px] sm:blur-[80px] bottom-10 right-10"
-            />
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap items-center gap-4 mb-10"
+            >
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("projects");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary-hover transition-colors shadow-subtle focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <span>{t.hero.viewWork}</span>
+                <ArrowUpRight className={`w-4 h-4 ${language === "ar" ? "rotate-[-90deg]" : ""}`} />
+              </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Saja_Qudeih_Resume.pdf"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-surface/90 border border-border text-foreground font-medium text-sm hover:bg-muted transition-colors focus-visible:ring-2 focus-visible:ring-primary backdrop-blur-md"
+              >
+                <FileText className="w-4 h-4 text-primary" />
+                <span>{t.hero.downloadResume}</span>
+              </a>
+            </motion.div>
 
-            {/* Rotating Glass Rectangles */}
+            {/* Social Links & Tech Labels Strip */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[280px] h-[280px] md:w-[450px] md:h-[450px] rounded-[2rem] sm:rounded-[3rem] border border-white/40 bg-gradient-to-tr from-white/10 to-white/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]"
-            />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[220px] h-[220px] md:w-[350px] md:h-[350px] rounded-full border border-white/50 bg-gradient-to-bl from-white/20 to-white/5 backdrop-blur-md shadow-xl"
-            />
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="pt-6 border-t border-border/60 flex flex-wrap items-center justify-between gap-4"
+            >
+              {/* Tech Badges */}
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-mono text-muted-foreground mr-1">{t.hero.focus}</span>
+                {techLabels.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 text-xs font-mono bg-surface/90 text-foreground/80 rounded-md border border-border/60 backdrop-blur-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
 
-            {/* Floating Mini Shapes */}
-            <motion.div
-              animate={{
-                y: [-20, 20, -20],
-                x: [-10, 10, -10],
-                rotate: [0, 10, 0],
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-12 right-12 w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/40 to-primary/10 border border-white/50 backdrop-blur-lg shadow-lg rotate-12"
-            />
-            <motion.div
-              animate={{
-                y: [20, -20, 20],
-                x: [10, -10, 10],
-                rotate: [0, -15, 0],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-              className="absolute bottom-24 left-8 w-24 h-24 rounded-full bg-gradient-to-tr from-accent/40 to-accent/10 border border-white/50 backdrop-blur-lg shadow-lg"
-            />
+              {/* Social Links */}
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/SajaJawad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="w-9 h-9 rounded-lg border border-border/80 bg-surface/90 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors backdrop-blur-sm"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://github.com/SajaJawad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="w-9 h-9 rounded-lg border border-border/80 bg-surface/90 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors backdrop-blur-sm"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Saja's Floating Avatar */}
+          {/* Right Column: Editorial Profile Visual */}
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute z-20"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative w-full max-w-sm lg:max-w-md flex justify-center"
           >
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border-[6px] sm:border-[8px] border-white/80 bg-white shadow-2xl transform hover:scale-105 transition-transform duration-500 backdrop-blur-sm">
-              <Image
-                src="/hero.png"
-                alt="Saja Jawad Soliman Qudaih"
-                fill
-                className="object-cover"
-                priority
-              />
+            {/* Subtle background frame shadow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-2xl blur-2xl transform rotate-2 opacity-60 pointer-events-none" />
+
+            {/* Editorial Frame around image */}
+            <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-2xl border border-border bg-surface/90 shadow-card p-3 backdrop-blur-md overflow-visible">
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-muted">
+                <Image
+                  src="/hero.png"
+                  alt="Saja Jawad"
+                  fill
+                  sizes="(max-width: 640px) 280px, 320px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+
+              {/* Editorial Badge Label 1 (Top Left) */}
+              <div className="absolute top-6 -left-5 sm:-left-7 px-3.5 py-2 bg-surface/95 backdrop-blur-md border border-border/90 rounded-xl shadow-card text-xs font-mono font-semibold text-foreground flex items-center gap-2 z-20">
+                <span className="w-2 h-2 rounded-full bg-primary" />
+                <span>{t.hero.badgeRole}</span>
+              </div>
+
+              {/* Editorial Badge Label 2 (Bottom Right) */}
+              <div className="absolute bottom-8 -right-5 sm:-right-7 px-3.5 py-2 bg-surface/95 backdrop-blur-md border border-border/90 rounded-xl shadow-card text-xs font-mono font-semibold text-foreground flex items-center gap-2 z-20">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span>{t.hero.badgeTech}</span>
+              </div>
             </div>
           </motion.div>
         </div>
-      </div>
+      </Container>
     </section>
   );
-};
+}
 
 export default Hero;

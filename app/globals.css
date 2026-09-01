@@ -104,6 +104,33 @@ body::before {
   color: var(--primary);
 }
 
+/* Custom Scrollbar matching Visual Identity (Purple Obsidian Theme) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--soft-lavender);
+  border-radius: 9999px;
+  border: 2px solid var(--background);
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Firefox scrollbar support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--background);
+}
+
 /* Accessibility focus ring */
 :focus-visible {
   outline: 2px solid var(--primary);

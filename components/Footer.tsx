@@ -25,7 +25,7 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <div className="relative w-8 h-8 rounded-full overflow-hidden border border-border">
               <Image
-                src="/logo.png"
+                src="/logo2.png"
                 alt="Saja Jawad"
                 fill
                 sizes="32px"

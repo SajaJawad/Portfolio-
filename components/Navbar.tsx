@@ -106,7 +106,7 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette?: () => 
         >
           <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/50 transition-colors shadow-sm shrink-0">
             <Image
-              src="/logo.png"
+              src="/logo2.png"
               alt={t.hero.name}
               fill
               sizes="36px"

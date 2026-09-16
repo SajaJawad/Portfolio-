@@ -38,6 +38,45 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "gardenia",
+    title: "Gardenia",
+    titleAr: "جاردينيا — تجربة التسوق الزهري الفاخرة",
+    category: "E-Commerce",
+    categoryAr: "تجارة إلكترونية",
+    shortDescription: "A premium floral e-commerce experience combining editorial design, intuitive product discovery, bouquet customization, thoughtful gifting, and a seamless responsive shopping journey.",
+    shortDescriptionAr: "تجربة تسوق إلكتروني فاخرة للزهور تجمع بين التصميم التحريري الرفيع، استكشاف المنتجات، تخصيص الباقات، والهدايا المدروسة عبر رحلة تسوق سلسة ومتجاوبة.",
+    description: "Gardenia is a modern floral e-commerce experience designed to transform the traditional process of ordering flowers into something more personal, elegant, and memorable.\n\nThe platform combines a luxury editorial design with an intuitive shopping experience, allowing customers to discover curated floral collections, shop by flower or occasion, customize their own bouquet, add thoughtful gifts, and complete their order through a seamless checkout journey.",
+    descriptionAr: "تعتبر جاردينيا منصة تسوق إلكتروني معاصرة مصممة لتحويل العملية التقليدية لطلب الزهور إلى تجربة شخصية، أنيقة ومميزة.\n\nتجمع المنصة بين التصميم التحريري الفاخر وتجربة التسوق التفاعلية السلسة، مما يتيح للعملاء اكتشاف مجموعات الزهور المختارة، التسوق حسب المناسبة أو نوع الزهر، تصميم باقاتهم الخاصة، إضافة الهدايا، وإتمام الطلب عبر تدفق دفع غير مسبوق.",
+    image: "/gardenia/hero.png",
+    coverImage: "/gardenia/hero.png",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS"],
+    role: "Product Designer & Frontend Engineer",
+    roleAr: "مصممة منتج ومطورة واجهات مستخدم",
+    year: "2026",
+    status: "Completed",
+    featured: true,
+    liveUrl: "https://gardenia-five.vercel.app/",
+    githubUrl: "https://github.com/SajaJawad/Gardenia",
+    challenge: "Most flower e-commerce experiences focus heavily on product grids and checkout, often losing the emotional quality associated with flowers and gifting.\n\nThe challenge with Gardenia was to balance two different goals:\n\n\"Create a visually rich, premium brand experience while keeping the shopping journey simple, fast, and intuitive.\"\n\nThe interface therefore needed to feel expressive without becoming distracting, and sophisticated without making basic commerce actions difficult to find.",
+    challengeAr: "تركز معظم تجارب التجارة الإلكترونية للزهور بشكل مكثف على شبكات المنتجات وإجراءات الدفع، مما يفقدها غالبًا الطابع العاطفي المرتبط بإهداء الزهور.\n\nكان التحدي في جاردينيا هو الموازنة بين هدفين مختلفين:\n\n\"ابتكار تجربة علامة تجارية غنية بصرياً وفاخرة مع الحفاظ على رحلة تسوق بسيطة وسريعة وسلسة.\"\n\nلذلك كان لا بد للواجهة أن تبدو معبرة دون أن تصبح مشتتة، ومتقدمة دون جعل إجراءات الشراء الأساسية صعبة المنال.",
+    solution: "Gardenia was designed around an editorial, story-driven shopping experience.\n\nLarge floral imagery, warm neutral backgrounds, soft pink accents, elegant typography, generous whitespace, and subtle motion establish the visual identity.\n\nBehind that visual layer is a structured commerce experience where customers can move naturally from inspiration to product discovery, customization, cart, and checkout.\n\nThe experience was designed responsively from the beginning, ensuring that the visual richness of the desktop interface translates naturally to tablets and mobile devices.",
+    solutionAr: "تم تصميم جاردينيا حول تجربة تسوق قوامها السرد البصري والأسلوب التحريري.\n\nتُنشئ الصور الزهرية الكبيرة، الخلفيات المحايدة الدافئة، لمسات الوردي الناعم، الخطوط الأنيقة، والمساحات البيضاء السخية الهوية البصرية اللائقة.\n\nوراء تلك الطبقة البصرية توجد تجربة تجارية مهيكلة تتيح للعملاء الانتقال بسلاسة من الإلهام إلى استكشاف المنتجات، التخصيص، سلة التسوق، والدفع.\n\nتم تصميم التجربة بتجاوب تام منذ البداية لضمان انتقال الثراء البصري لشاشات السطح المكتبي بسلاسة للأجهزة اللوحية والمحمولة.",
+    features: [
+      "Product discovery path by flower varieties & occasion collections",
+      "Custom Bouquet Studio with live order summary and dynamic pricing",
+      "Personalized gift messaging, extras, and wrapping customization",
+      "AI-assisted floral arrangement preview concept",
+      "Responsive commerce interface optimized for mobile, tablet, and desktop"
+    ],
+    featuresAr: [
+      "مسار استكشاف المنتجات حسب أنواع الزهور ومجموعات المناسبات",
+      "استوديو تخصيص الباقات التفاعلي مع ملخص مباشر للطلب وتسعير ديناميكي",
+      "إرسال رسائل الإهداء الشخصية وتخصيص التغليف والإضافات",
+      "مفهوم المعاينة الذكية لتشكيلات الزهور قبل الطلب",
+      "واجهة تجارة متجاوبة بالكامل ومحسنة للجوال واللوحي والمكتبي"
+    ]
+  },
+  {
     slug: "aetheris-ai",
     title: "Subsec V2 — AI Technology Website",
     titleAr: "موقع Subsec V2 — منصة تقنيات الذكاء الاصطناعي",

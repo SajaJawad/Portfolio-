@@ -28,6 +28,20 @@ export async function generateMetadata({ params }: CaseStudyProps): Promise<Meta
     };
   }
 
+  if (slug === "gardenia") {
+    return {
+      title: "Gardenia — Premium Floral E-Commerce Experience | Saja Jawad",
+      description:
+        "Explore Gardenia, a premium floral e-commerce experience focused on curated flower discovery, bouquet customization, thoughtful gifting, responsive design, and a seamless shopping journey.",
+      openGraph: {
+        title: "Gardenia — Premium Floral E-Commerce Experience | Saja Jawad",
+        description:
+          "Explore Gardenia, a premium floral e-commerce experience focused on curated flower discovery, bouquet customization, thoughtful gifting, responsive design, and a seamless shopping journey.",
+        images: [{ url: project.image }],
+      },
+    };
+  }
+
   return {
     title: `${project.title} — Case Study | Saja Jawad`,
     description: project.shortDescription,

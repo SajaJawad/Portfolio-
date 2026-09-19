@@ -8,17 +8,12 @@ import { Project } from "@/lib/projects";
 import { Container } from "@/components/ui/Container";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { useLanguage } from "@/components/LanguageProvider";
-import { GardeniaCaseStudy } from "@/components/GardeniaCaseStudy";
-
 interface CaseStudyClientProps {
   project: Project;
   nextProject: Project;
 }
 
 export function CaseStudyClient({ project, nextProject }: CaseStudyClientProps) {
-  if (project.slug === "gardenia") {
-    return <GardeniaCaseStudy project={project} nextProject={nextProject} />;
-  }
   const { t, language } = useLanguage();
 
   const title = (language === "ar" && project.titleAr) ? project.titleAr : project.title;

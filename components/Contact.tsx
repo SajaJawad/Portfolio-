@@ -92,6 +92,7 @@ export function Contact() {
                     onClick={handleCopyEmail}
                     type="button"
                     aria-label="Copy Email Address"
+                    suppressHydrationWarning
                     className="px-3 py-1.5 rounded-lg bg-soft-lavender text-primary hover:bg-primary hover:text-primary-foreground text-xs font-medium flex items-center gap-1.5 shrink-0 transition-colors focus-visible:ring-2 focus-visible:ring-primary cursor-pointer border border-primary/15"
                   >
                     {copied ? (
@@ -200,6 +201,7 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder={t.contact.yourNamePlaceholder}
                       required
+                      suppressHydrationWarning
                       className="w-full px-4 py-2.5 bg-surface border border-border rounded-xl text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-subtle"
                     />
                   </div>
@@ -216,6 +218,7 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder={t.contact.yourEmailPlaceholder}
                       required
+                      suppressHydrationWarning
                       className="w-full px-4 py-2.5 bg-surface border border-border rounded-xl text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-subtle"
                     />
                   </div>
@@ -232,6 +235,7 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder={t.contact.messagePlaceholder}
                       required
+                      suppressHydrationWarning
                       className="w-full px-4 py-2.5 bg-surface border border-border rounded-xl text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary resize-none shadow-subtle"
                     />
                   </div>
@@ -239,6 +243,7 @@ export function Contact() {
                   <div className="pt-2">
                     <button
                       type="submit"
+                      suppressHydrationWarning
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-hover transition-colors shadow-subtle focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
                     >
                       <WhatsAppIcon size={18} />

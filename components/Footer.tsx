@@ -82,6 +82,7 @@ export function Footer() {
               onClick={scrollToTop}
               type="button"
               aria-label="Back to top"
+              suppressHydrationWarning
               className="w-8 h-8 rounded-lg border border-border bg-surface flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
             >
               <ArrowUp className="w-4 h-4" />

@@ -38,6 +38,43 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "malboos",
+    title: "Malboos — Luxury Abayas & Makhawir E-Commerce",
+    titleAr: "ملبوس — منصة فاخرة للتسوق الإلكتروني للعبايات والمخاوير",
+    category: "E-Commerce",
+    categoryAr: "تجارة إلكترونية",
+    shortDescription: "A luxury e-commerce platform for contemporary Abayas and Makhawir, combining authentic tradition with modern aesthetic design and a seamless shopping experience.",
+    shortDescriptionAr: "متجر إلكتروني فاخر للعبايات والمخاوير بتصاميم عصرية تجمع بين الأصالة والحداثة، وتوفر تجربة تسوق أنيقة وسلسة واستكشاف متكامل للمجموعات.",
+    description: "Malboos is a high-end luxury e-commerce web application tailored for modern Abayas and Makhawir collections. Designed with elegant warm tones, clean typography, dynamic slideshows, and smooth transitions.\n\nThe project focuses on delivering a refined shopping experience, featuring category filtering, detailed product showcases, interactive cart management, dynamic product sliders, and a responsive design optimized for mobile and desktop shoppers.",
+    descriptionAr: "منصة \"ملبوس\" هي متجر إلكتروني راقٍ ومخصص لعرض وتسوق أحدث تشكيلات العبايات والمخاوير الفاخرة. يجمع الموقع بين لمسات التصميم الداكن الفاخرة، والخطوط الأنيقة، والتصفح السلس للوصول إلى التجربة المثالية للعملاء.\n\nيركز المشروع على تقديم تجربة شراء فاخرة تشمل تصفح الكتالوج، فلترة المنتجات، استعراض التفاصيل بدقة عالية، سلة تسوق تفاعلية، وتصميم متجاوب كلياً على كافة الشاشات.",
+    image: "/malboos.png",
+    coverImage: "/malboos.png",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    role: "Frontend Engineer",
+    roleAr: "مطورة واجهات مستخدم",
+    year: "2026",
+    status: "Completed",
+    featured: true,
+    liveUrl: "https://malboos-pi.vercel.app/",
+    githubUrl: "https://github.com/SajaJawad/malboos-abaya",
+    challenge: "E-commerce for luxury fashion items requires balancing rich visual aesthetics with high performance, intuitive navigation, and fast load times on all screen sizes.",
+    challengeAr: "يتطلب تصميم المتاجر الإلكترونية للعلامات التجارية الفاخرة تحقيق التوازن بين الأناقة البصرية العالية وبين السرعة، سلاسة التنقل، وسهولة الوصول للمنتجات عبر مختلف الشاشات.",
+    solution: "Designed and built with Next.js and Tailwind CSS, focusing on smooth interactive UI components, elegant typography, warm neutral palette, and full responsiveness.",
+    solutionAr: "تم تصميم المنصة وبناؤها باستخدام Next.js و Tailwind CSS مع التركيز على المكونات التفاعلية السلسة، الخطوط الفاخرة، الألوان الدافئة، والتجاوب التام لجميع المستخدمين.",
+    features: [
+      "Curated Abayas & Makhawir luxury product catalog",
+      "Interactive hero banner slider & collection discovery",
+      "Seamless product details & cart drawer workflow",
+      "Fully responsive design for mobile, tablet, and desktop"
+    ],
+    featuresAr: [
+      "كتالوج فاخر ومصنف للعبايات والمخاوير",
+      "واجهة رئيسية تفاعلية مع عارض سلايدر للمجموعات المميزة",
+      "سلة شراء تفاعلية ومعاينة تفاصيل المنتجات بكل سلاسة",
+      "تصميم متجاوب بالكامل للأجهزة المحمولة واللوحية والمكتبية"
+    ]
+  },
+  {
     slug: "gardenia",
     title: "Gardenia",
     titleAr: "جاردينيا — تجربة التسوق الزهري الفاخرة",
